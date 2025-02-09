@@ -132,7 +132,7 @@ pub fn run_app<B: ratatui::backend::Backend>(terminal: &mut Terminal<B>, mut app
                 .split(f.size());
 
             let content_layout = Layout::default() 
-                .direction(Direction::Horizontal)
+                .direction(Direction::Vertical)
                 .constraints([
                     Constraint::Percentage(50), 
                     Constraint::Percentage(50), 
@@ -160,7 +160,7 @@ pub fn run_app<B: ratatui::backend::Backend>(terminal: &mut Terminal<B>, mut app
 
             let list = List::new(items)
                 .block(Block::default().title("Commands").borders(Borders::ALL))
-                .highlight_style(Style::default().add_modifier(Modifier::BOLD).bg(Color::LightGreen))
+                .highlight_style(Style::default().add_modifier(Modifier::BOLD).fg(Color::Gray).bg(Color::Blue))
                 .highlight_symbol("> ");
 
             f.render_stateful_widget(list, content_layout[0], &mut app.state);
@@ -190,9 +190,9 @@ pub fn run_app<B: ratatui::backend::Backend>(terminal: &mut Terminal<B>, mut app
                 
             ]));
             let help_paragraph = Paragraph::new(help_text)
-                .style(Style::default().fg(Color::LightCyan)) 
+                .style(Style::default().fg(Color::Gray)) 
                 .alignment(Alignment::Center) 
-                .block(Block::default().borders(Borders::TOP)); 
+                .block(Block::default().style(Style::default().bg(Color::DarkGray))); 
 
             f.render_widget(help_paragraph, main_layout[2]); 
    
