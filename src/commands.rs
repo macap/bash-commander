@@ -38,7 +38,7 @@ pub fn load_commands_from_file() -> io::Result<Vec<BashCmd>> {
     let mut commands = Vec::new();
     for line_result in reader.lines() { 
         let line = line_result?; 
-        let parts: Vec<&str> = line.splitn(3, '|').collect(); 
+        let parts: Vec<&str> = line.splitn(3, '※').collect(); 
         if parts.len() == 3 { 
             let name = parts[0].trim().to_string(); 
             let desc = parts[1].trim().to_string(); 
@@ -64,7 +64,7 @@ pub fn save_commands_to_file(app: &crate::app::App) -> io::Result<()> {
     let path = get_commands_file_path();
     let mut file = fs::File::create(path)?; 
     for command in &app.items { 
-        writeln!(file, "{name}|{desc}|{command}", 
+        writeln!(file, "{name}※{desc}※{command}", 
                  name = command.name,
                  desc = command.desc,
                  command = command.command)?;
