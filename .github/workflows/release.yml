@@ -40,7 +40,7 @@ jobs:
       - name: Publish artifacts and release
         uses: houseabsolute/actions-rust-release@v0
         with:
-          executable-name: bc
+          executable-name: bash-commander
           target: ${{ matrix.platform.target }}
           changes-file: ""
           extra-files:
