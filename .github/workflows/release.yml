@@ -42,3 +42,5 @@ jobs:
         with:
           executable-name: bc
           target: ${{ matrix.platform.target }}
+          changes-file: ""
+          extra-files:
