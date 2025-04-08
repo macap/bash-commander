@@ -71,3 +71,19 @@ pub fn save_commands_to_file(app: &crate::app::App) -> io::Result<()> {
     }
     Ok(())
 }
+
+pub fn append_command_to_file(command: &BashCmd) -> io::Result<()> {
+    let path = get_commands_file_path();
+    let mut file = fs::OpenOptions::new()
+        .write(true)
+        .append(true)
+        .create(true)
+        .open(path)?;
+
+    writeln!(file, "{name}※{desc}※{command}", 
+                 name = command.name,
+                 desc = command.desc,
+                 command = command.command)?;
+
+    Ok(())
+}

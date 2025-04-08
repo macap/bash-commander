@@ -2,6 +2,7 @@ mod app;
 mod ui;
 mod commands;
 mod execute;
+mod cli;
 
 use ratatui:: { backend::CrosstermBackend, Terminal};
 use crossterm::{
@@ -10,6 +11,7 @@ use crossterm::{
     event::{EnableMouseCapture, DisableMouseCapture, Event, KeyCode, KeyEvent, KeyModifiers},
 };
 use std::{
+    env,
     error::Error,
     io::{self, BufReader, BufRead, stdout},
     vec,
@@ -23,12 +25,11 @@ use std::{
 #[macro_use] extern crate run_shell;
 
 use crate::app::BashCmd;
+use crate::cli::text_flow;
 
 use crate::commands::save_commands_to_file; 
 
-
-
-fn main() -> Result<(), Box<dyn Error>> {
+fn default_flow() -> Result<(), Box<dyn Error>> {
     enable_raw_mode()?;
     let mut stdout = io::stdout();
     execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
@@ -54,11 +55,19 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    
-
-        execute::execute_command(selected_command_string_option); 
-
+    execute::execute_command(selected_command_string_option); 
         
-
     Ok(())
+}
+
+fn main() -> Result<(), Box<dyn Error>> {
+   let args: Vec<String> = env::args().collect();
+
+    if args.len() > 1 {
+        text_flow();
+    } else {
+        default_flow();
+    }
+
+   Ok(())
 }
