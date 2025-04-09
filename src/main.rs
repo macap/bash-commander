@@ -8,26 +8,16 @@ use ratatui:: { backend::CrosstermBackend, Terminal};
 use crossterm::{
     terminal::{enable_raw_mode, disable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
     execute,
-    event::{EnableMouseCapture, DisableMouseCapture, Event, KeyCode, KeyEvent, KeyModifiers},
+    event::{EnableMouseCapture, DisableMouseCapture},
 };
 use std::{
     env,
     error::Error,
-    io::{self, BufReader, BufRead, stdout},
-    vec,
-    fs,
-    path::PathBuf,
-    io::Write,
-    process::{Command, Stdio}
+    io::{self},
+    io::Write
 };
 
-
-#[macro_use] extern crate run_shell;
-
-use crate::app::BashCmd;
 use crate::cli::text_flow;
-
-use crate::commands::save_commands_to_file; 
 
 fn default_flow() -> Result<(), Box<dyn Error>> {
     enable_raw_mode()?;

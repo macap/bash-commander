@@ -1,7 +1,6 @@
 use ratatui::{
-    backend::CrosstermBackend,
     Terminal,
-    widgets::{List, ListItem, Block, Borders, ListState, Paragraph, BorderType, Clear},
+    widgets::{List, ListItem, Block, Borders, Paragraph, BorderType, Clear},
     layout::{Layout, Constraint, Direction, Rect, Alignment},
     style::{Style, Color, Modifier},
     text::{Span, Text, Line},
@@ -10,7 +9,6 @@ use crossterm::event::{Event, KeyCode, KeyModifiers};
 use std::io;
 
 use crate::app::BashCmd;
-use crate::app::App; 
 use crate::commands::save_commands_to_file; 
 
 
